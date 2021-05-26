@@ -32,9 +32,7 @@ function ContactForm({ contacts, addContact, fetchContact }) {
     e.preventDefault();
 
     let acc = false;
-
     contacts.forEach(el => el.name.toLocaleLowerCase() === name.toLocaleLowerCase() && (acc = true));
-
     acc ? alert(`${name} is already in contacts`) : addContact({ name, number });
     reset();
   };
