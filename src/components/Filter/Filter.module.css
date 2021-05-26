@@ -1,0 +1,17 @@
+.filter {
+  padding: 10px;
+}
+
+.filter__header {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.filter__input {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 2px 10px;
+  min-width: 200px;
+}

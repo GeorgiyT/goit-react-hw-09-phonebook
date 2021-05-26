@@ -1,0 +1,7 @@
+.list {
+  display: flex;
+}
+
+.list li:not(:last-child) {
+  margin-right: 15px;
+}

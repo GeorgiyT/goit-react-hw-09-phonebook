@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.list li:not(:last-child) {
+  margin-right: 10px;
+}
+
+.list img {
+  height: 50px;
+  width: auto;
+  border-radius: 20px;
+}
