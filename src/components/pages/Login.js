@@ -1,55 +1,59 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as authOperations from "../../auth/authOperations";
 import styles from "./Login.module.css";
 
-class Login extends Component {
-  state = {
-    email: "",
-    password: ""
+function Login({ isLoading, login }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = e => {
+    switch (e.target.name) {
+      case "email": {
+        setEmail(e.target.value);
+        break;
+      }
+      case "password": {
+        setPassword(e.target.value);
+        break;
+      }
+      default:
+        console.log("ERROR");
+    }
   };
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.login(this.state);
-    this.setState({ email: "", password: "" });
+    login({ email, password });
+    setEmail("");
+    setPassword("");
   };
 
-  render() {
-    return (
-      <div className={styles.contentBox}>
-        <h1>Login</h1>
-        <form action="onSubmit" onSubmit={this.handleSubmit}>
-          <label>
-            E-mail
-            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
-          </label>
-          <label>
-            Password
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-          </label>
-          <button type="submit" onClick={() => {}}>
-            Login
-          </button>
-        </form>
-        {this.props.isLoading && <h2 className={styles.contactList__header}>Загружаем....</h2>}
-      </div>
-    );
-  }
+  return (
+    <div className={styles.contentBox}>
+      <h1>Login</h1>
+      <form action="onSubmit" onSubmit={handleSubmit}>
+        <label>
+          E-mail
+          <input type="text" name="email" value={email} onChange={handleChange} />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" value={password} onChange={handleChange} />
+        </label>
+        <button type="submit">Login</button>
+      </form>
+      {isLoading && <h2 className={styles.contactList__header}>Загружаем....</h2>}
+    </div>
+  );
 }
 
 const mapStateToProps = state => ({
   isLoading: state.userAuth.isRequested
 });
 
-const mapDispatchToProps = dispatch => ({
-  login: user => dispatch(authOperations.login(user))
-});
+const mapDispatchToProps = {
+  login: user => authOperations.login(user)
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -14,13 +14,6 @@ const Navigation = ({ isAuth }) => {
           </NavLink>
         </li>
       )}
-      {/* {isAuth && (
-        <li>
-          <NavLink activeClassName={""} className={""} exact to="/contacts">
-            Phonebook
-          </NavLink>
-        </li>
-      )} */}
     </ul>
   );
 };
